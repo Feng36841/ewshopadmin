@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <!--      强制chromium内核，作用于 360浏览器，qq浏览器等国产双核浏览器-->
+    <meta name="renderer" content="webkit" />
+    <!--      强制chromium内核，作用于其他的双核浏览器-->
+    <meta name="force-rendering" content="webkit" />
+    <!--      如果有安装goodle chrome frome 插件将强制为chromium内核
+              否则强制本机支持最高版本ie浏览器，作用于ie浏览器。
+    -->
+    <meta http-equiv="x-ua-compatible" content="IE=Edge,chrome=1" />
+    <!--  content属性值
+          width可视区域的宽度，值可为数字或关键词device-width
+          height 同width
+          intial-scale:页面首次被显示是可视区的缩放规则,取值1.0则页面按实际尺寸显示，无任何缩放
+          maximum-scale=1.0:maximum-scale=1.0,可视区域的缩放级别，
+          maximum-scale用户可将页面放大的程度 1.0将禁止用户放大到实际的尺寸之上
+          user-scalable:是否可对页面进行缩放，no 禁止缩放-->
+    <meta
+            content="width=device-width,initial-scale=1.0,minimum=1.0,maximum-scale=1.0,use-scalable=0 "
+            name="viewport"
+    />
+    <title>EwshopAdmin</title>
   </head>
   <body>
     <div id="app"></div>
