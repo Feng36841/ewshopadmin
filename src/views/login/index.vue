@@ -57,7 +57,9 @@
     // import {login} from "../../api/auth";
     // import {router} from "../../router";
     import {useRouter,useRoute} from "vue-router";
-
+    import { useMessage } from 'naive-ui'
+    const message = useMessage()
+    window.$message=useMessage()
     interface FormState {
         email: string;
         password: string;
@@ -100,8 +102,9 @@
                 //关闭登陆中
                 loading.value=false;
                 //弹出提示 登录成功
-                alert('登录成功')
-                console.log(window.location.href)
+                message.success('登录成功')
+
+                // console.log(window.location.href)
 
                 if (turnUrl2){
                     //判断是否存在上个界面

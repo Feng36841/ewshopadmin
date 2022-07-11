@@ -1,8 +1,9 @@
 import {h} from "vue";
 import {NIcon} from "naive-ui";
 import {Component} from "@vue/runtime-core";
-import {BookOutline as BookIcon} from "@vicons/ionicons5";
+import {BookOutline as BookIcon, LogIn} from "@vicons/ionicons5";
 import router from "@/router";
+
 
 export const renderIcon =  (icon:Component) : Component =>{
     return () => h(NIcon, null, { default: () => h(icon) })
@@ -12,21 +13,38 @@ export const renderIcon =  (icon:Component) : Component =>{
  * 递归组装菜单格式
  */
 export function generatorMenu(routerMap: Array<any>) {
-    // routerMap 按照 sort 排序
-    routerMap.sort((a, b) => a.meta.sort - b.meta.sort);
-
+    // console.log(routerMap,'111')
+    //routerMap 按照sort 排序
+    routerMap.sort((a,b)=>a.meta.sort - b.meta.sort)
     let result = routerMap.map((item) => {
+        // console.log(item)
         let menu = {
             label: item?.meta?.title,
             key: item?.name,
             icon: item.meta?.icon,
         }
-        if (item.children && item.children.length > 1){
-            menu.children = generatorMenu(item.children)
+        if (item.children && item.children.length>1){
+            menu.children=generatorMenu(item.children)
         }
+        // console.log(menu,'menu')
         return menu
     })
     return result;
+    // routerMap 按照 sort 排序
+    // routerMap.sort((a, b) => a.meta.sort - b.meta.sort);
+    //
+    // let result = routerMap.map((item) => {
+    //     let menu = {
+    //         label: item?.meta?.title,
+    //         key: item?.name,
+    //         icon: item.meta?.icon,
+    //     }
+    //     if (item.children && item.children.length > 1){
+    //         menu.children = generatorMenu(item.children)
+    //     }
+    //     return menu
+    // })
+    // return result;
     //   {
 //     label: '首页',
 //     key: 'go-back-home',

@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {login,user} from "../api/auth";
+import {info} from "autoprefixer";
 
 export interface IUserState {
     token:string;
@@ -32,6 +33,12 @@ export const useUserStore =defineStore({
             return this.permissions;
         },
         getUserInfo():Object{
+            //判断this.info是否是空对象
+            // if (this.info?.id){
+            //     console.log(123123)
+            // }else {
+            //     console.log(456456)
+            // }
             return this.info;
         }
     },

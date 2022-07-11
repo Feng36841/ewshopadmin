@@ -6,7 +6,7 @@ import {resolve} from 'path'
 function pathResolve(dir:string){
     return resolve(process.cwd(),'.',dir)
 }
-console.log(process.cwd())
+// console.log(process.cwd())
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
