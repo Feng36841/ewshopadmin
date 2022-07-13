@@ -35,28 +35,28 @@ request.interceptors.response.use((response)=>{
     return response.data;
 },(error)=>{
     const {response} = error
-    console.log(response,'response')
+    // console.log(response,'response')
     //报错的是定义前置拦截器时候抛出一个报错信息
-    switch (response.status) {
-        case 401:
-            window.$message.error('登录失败，请重新登录')
-            localStorage.removeItem('token')
-            setTimeout(()=>{
-                window.location.href='/login'
-            },1000)
-            break;
-        case 404:
-            window.$message.error('接口不存在')
-            break;
-        case 500:
-            break;
-        case 502:
-            window.$message.error('网络异常')
-            break;
-        case 422:
-            window.$message.error('参数错误')
-            break;
-    }
+    // switch (response.status) {
+    //     case 401:
+    //         window.$message.error('登录失败，请重新登录')
+    //         localStorage.removeItem('token')
+    //         setTimeout(()=>{
+    //             window.location.href='/login'
+    //         },1000)
+    //         break;
+    //     case 404:
+    //         window.$message.error('接口不存在')
+    //         break;
+    //     case 500:
+    //         break;
+    //     case 502:
+    //         window.$message.error('网络异常')
+    //         break;
+    //     case 422:
+    //         window.$message.error('参数错误')
+    //         break;
+    // }
 
     //报错的时候抛出一个报错信息
     return Promise.reject(error);

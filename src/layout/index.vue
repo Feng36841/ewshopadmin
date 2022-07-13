@@ -31,7 +31,7 @@ window.$message = useMessage()
 
 <style scoped>
 .content{
-  max-height:calc(100vh - 130px);
-  height:calc(100vh - 130px);
+  max-height:calc(100vh - 68px);
+  height:calc(100vh - 68px);
 }
 </style>

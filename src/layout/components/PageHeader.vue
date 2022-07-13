@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-14 flex items-center  overflow-hidden justify-end px-8 shadow shadow-md shadow-sky-500"   style="border-bottom: 1px solid #ccc">
+  <div class="w-full h-10 flex items-center  overflow-hidden justify-end px-8 shadow shadow-md shadow-sky-500"   style="border-bottom: 1px solid #ccc">
     <!-- 头像 -->
     <n-dropdown :options="options" @select="select">
       <div class="flex items-center">
@@ -24,8 +24,8 @@ import {
   LogOutOutline as LogoutIcon
 } from '@vicons/ionicons5'
 import {useUserStore} from '@/store/user';
-// const userStore = useUserStore()
-// userStore.value.getUserInfo()
+const userStore = useUserStore()
+// userStore.getUserInfo
 
 const options = ref([
   {
