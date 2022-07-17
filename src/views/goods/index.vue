@@ -1,5 +1,5 @@
 <template>
-    <div class="userlist">
+    <div class="goodslist">
         <div class="pl-5 mt-0.5 h-16 w-full bg-white py-2">
             <span class="text-slate-400 pr-1">首页</span> / <span class="pl-1">商品管理</span>
             <div class="font-bold text-xl mt-0.5">商品管理</div>
@@ -68,6 +68,7 @@
     import type { DataTableColumns } from 'naive-ui'
     import EditUser from './components/EditUser.vue'
     import AddGoods from './components/AddGoods.vue'
+    import {goods} from '../../api/goods'
     import {users} from "../../api/users";
     //添加模态框
     const showModal=ref(false)
@@ -109,8 +110,8 @@
     }): DataTableColumns<Song> => {
         return [
             {
-                title: '头像',
-                key: 'avatar_url',
+                title: '图片',
+                key: 'cover_url',
                 minWidth:40,
                 render (row) {
                     return h(
@@ -118,23 +119,31 @@
                         {
                             round:true,
                             size:"tiny",
-                            src:row.avatar_url,
+                            src:row.cover_url,
                         },
                     )
                 }
             },
             {
-                title: '姓名',
-                key: 'name',
+                title: '商品名',
+                key: 'title',
                 align:"left"
             },
             {
-                title: '邮箱',
-                key: 'email'
+                title: '价格',
+                key: 'price'
             },
             {
-                title: '是否禁用',
-                key: 'is_locked',
+                title: '库存',
+                key: 'stock'
+            },
+            {
+                title: '销量',
+                key: 'sales'
+            },
+            {
+                title: '是否上架',
+                key: 'is_on',
                 render (row) {
                     return h(
                         NSwitch,
@@ -146,6 +155,16 @@
                         //     inactiveValue:0,
                         //     value:row.is_locked ==1 ? fales : true
                         // },
+                    )
+                }
+
+            },
+            {
+                title: '是否推荐',
+                key: 'is_recommend',
+                render (row) {
+                    return h(
+                        NSwitch,
                     )
                 }
 
@@ -205,10 +224,10 @@
     })
     const pagination=ref(false as const)
     onMounted(()=>{
-        getUsersList({});
+        getGoodsList({});
     })
     const updatePage=(pageNum)=>{
-        getUsersList({
+        getGoodsList({
             name:formSearch.value.name,
             email:formSearch.value.email,
             current:pageNum
@@ -216,20 +235,20 @@
     }
     const serachSubmit=(e)=>{
         e.preventDefault()
-        getUsersList({
+        getGoodsList({
             name:formSearch.value.name,
             email:formSearch.value.email,
             current:1
         })
     }
     const serachReload=()=>{
-        getUsersList({});
+        getGoodsList({});
         formSearch.value.name='';
         formSearch.value.email='';
     }
-    const getUsersList=(params)=>{
+    const getGoodsList=(params)=>{
         loadingBar.start()
-        users(params).
+        goods(params).
         then(res=>{
             data.value=res.data as Song[]
             total_pages.value=res.meta.pagination.total_pages
@@ -240,7 +259,7 @@
         })
     }
     const reload=()=>{
-        getUsersList({
+        getGoodsList({
             name:formSearch.value.name,
             email:formSearch.value.email,
             current:page.value
@@ -266,7 +285,7 @@
     /*    */
     /*}*/
 
-    .userlist {
+    .goodslist {
         .n-data-table .n-data-table-td:nth-child(1){
             text-align: center;
         }
@@ -275,6 +294,7 @@
         }
         .n-data-table .n-data-table-td:nth-child(3){
             /*margin-left: 40px;*/
+            text-align: center;
         }
         .n-data-table .n-data-table-td:nth-child(4){
             text-align: center;
@@ -283,6 +303,15 @@
             text-align: center;
         }
         .n-data-table .n-data-table-td:nth-child(6){
+            text-align: center;
+        }
+        .n-data-table .n-data-table-td:nth-child(7){
+            text-align: center;
+        }
+        .n-data-table .n-data-table-td:nth-child(8){
+            text-align: center;
+        }
+        .n-data-table .n-data-table-td:nth-child(9){
             text-align: center;
         }
     }

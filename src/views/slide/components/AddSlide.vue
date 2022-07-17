@@ -67,7 +67,7 @@
     import {ref,defineProps} from 'vue'
 import {useMessage,} from 'naive-ui'
 
-    const emit = defineEmits(['changeshowModal'])
+    const emit = defineEmits(['checkShowModal'])
 const  props=defineProps({
     showModal:{
         type:Boolean,
