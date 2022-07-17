@@ -1,5 +1,24 @@
 # EWSHOPADMIN
 
+##权限
+title  用户管理
+key     user
+title   商品管理
+key     goods
+title   订单管理
+key     order
+
+##角色
+运营主管
+        用户管理
+        商品管理
+        订单管理
+运营
+        用户管理
+        商品管理
+        
+张三 运营 ['user','goods','user_addbutton']
+
 # Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.

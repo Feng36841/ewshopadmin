@@ -16,7 +16,14 @@ export function generatorMenu(routerMap: Array<any>) {
     // console.log(routerMap,'111')
     //routerMap 按照sort 排序
     routerMap.sort((a,b)=>a.meta.sort - b.meta.sort)
+    let permissions=['users','goods','dashboard']
     let result = routerMap.map((item) => {
+        //判断item.name 是否在permissions中 如果不存在跳过
+        // if (!permissions.includes(item.name)){
+        //     console.log(item.name,'13579')
+        //     //跳过map
+        //     return null;
+        // }
         // console.log(item)
         let menu = {
             label: item?.meta?.title,
@@ -25,11 +32,18 @@ export function generatorMenu(routerMap: Array<any>) {
         }
         if (item.children && item.children.length>1){
             menu.children=generatorMenu(item.children)
+        }else if (item.children && item.children.length===1){
+            menu.key=item?.children[0].name
         }
         // console.log(menu,'menu')
         return menu
     })
+    // console.log(result,'result')
+    //去除result null
+    // return result.filter(item=>item != null)
     return result;
+
+
     // routerMap 按照 sort 排序
     // routerMap.sort((a, b) => a.meta.sort - b.meta.sort);
     //

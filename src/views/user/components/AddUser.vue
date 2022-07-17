@@ -9,7 +9,7 @@
                 aria-modal="true"
         >
             <template #header-extra>
-                <span @click="$emit('changeshowModal',false)">X</span>
+                <span @click="$emit('checkShowModal',false)" class="cursor-pointer">X</span>
             </template>
             <n-form ref="formRef" :model="model" :rules="rules">
                 <n-form-item path="name" label="姓名">
@@ -46,9 +46,7 @@
                     </n-col>
                 </n-row>
             </n-form>
-            <template #footer>
-                尾部
-            </template>
+
         </n-card>
     </n-modal>
 </template>
@@ -78,19 +76,48 @@ const rules= {
     name: [
         {
             required: true,
-            message: '请输入用户名称'
+            message: '请输入用户名称',
+            trigger:'blur'
         }
     ],
     email: [
         {
             required: true,
-            message: '请输入email'
-        }
+            message: '',
+            trigger:'blur',
+            // validator:(rule, value)=>{
+            //     const reg =  /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;
+            //     let objExp=new RegExp(reg)
+            //     if (model.email==null){
+            //         rules.email.message='邮箱不能为空'
+            //     }else if (objExp.test(model.email)){
+            //         rules.email.message='邮箱不能为空'
+            //     }else {
+            //         rules.email.message='邮箱不能为空'
+            //     }
+            // }
+        },
+        {
+            validator:(rule,value)=>{
+                if (value == null){
+                    return new Error('邮箱不能为空')
+                }else if (! /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(value)){
+                    return new Error('请输入正确邮箱')
+                }
+            },
+            trigger: ["blur"],
+        },
+        // {
+        //     pattern: /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/,
+        //     message: "请输入正确格式的邮箱",
+        //     trigger: ["blur"],
+        // }
     ],
     password: [
         {
             required: true,
-            message: '请输入密码'
+            message: '请输入密码',
+            trigger:'blur'
         }
     ],
 
@@ -104,8 +131,12 @@ const rules= {
             }else {
                 console.log(model.value)
                 addUsers(model.value).then(res=>{
-                    emit('changeshowModal',false)
+                    emit('checkShowModal',false)
+                    emit('reloadTable')
                 })
+                setTimeout(()=>{
+                    message.success(model.value.name+'添加成功',{duration:2000})
+                },800)
             }
         })
     }

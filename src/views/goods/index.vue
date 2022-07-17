@@ -1,8 +1,8 @@
 <template>
     <div class="userlist">
         <div class="pl-5 mt-0.5 h-16 w-full bg-white py-2">
-            <span class="text-slate-400 pr-1">首页</span> / <span class="pl-1">用户管理</span>
-            <div class="font-bold text-xl mt-0.5">用户管理</div>
+            <span class="text-slate-400 pr-1">首页</span> / <span class="pl-1">商品管理</span>
+            <div class="font-bold text-xl mt-0.5">商品管理</div>
         </div>
         <div class="content pt-1 ">
             <div class="bg-white pr-8 h-12">
@@ -32,7 +32,7 @@
             </div>
             <div class="mt-1 bg-white">
                 <div class="py-2 flex">
-                    <span class="text-base pl-5 ">用户列表</span>
+                    <span class="text-base pl-5 ">商品列表</span>
                     <span class="ml-auto mr-8"><n-button @click="showModal = true" type="info" size="small">+ 新建</n-button></span>
                 </div>
                 <div >
@@ -53,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <AddUser  @checkShowModal="checkShowModal" @reloadTable="reload"  :showModal="showModal"></AddUser>
+            <AddGoods  @checkShowModal="checkShowModal" @reloadTable="reload"  :showModal="showModal"></AddGoods>
 <!-- v-if取消之后清空数据 <AddUser v-if="showModal" @changeshowModal="changeshowModal" @reloadUsers="reloadUsers"  :showModal="showModal"></AddUser>-->
             <EditUser :user_id="user_id" v-if="showEditModal"  @checkShowModal="checkEditModal" @reloadTable="reload"  :showModal="showEditModal"></EditUser>
         </div>
@@ -67,7 +67,7 @@
     import { NButton, useMessage ,NAvatar,NSwitch,useLoadingBar} from 'naive-ui'
     import type { DataTableColumns } from 'naive-ui'
     import EditUser from './components/EditUser.vue'
-    import AddUser from './components/AddUser.vue'
+    import AddGoods from './components/AddGoods.vue'
     import {users} from "../../api/users";
     //添加模态框
     const showModal=ref(false)

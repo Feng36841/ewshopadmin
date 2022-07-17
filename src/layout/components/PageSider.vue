@@ -3,7 +3,7 @@
     <div class="m-0">
       <img class="m-auto" src="~@/assets/images/logo.png"  alt="logo"/>
     </div>
-      <n-menu :options="menuOptions" inverted @update:value="handleUpdateValue" />
+      <n-menu :options="menuOptions" :value="defaultKey" inverted @update:value="handleUpdateValue" />
 <!--    <n-menu :options="menuOptions" inverted @update:value="handleUpdateValue" />-->
 
 <!--        <n-menu-->
@@ -18,22 +18,30 @@
 </template>
 
 <script lang="ts" setup>
-    import { defineComponent, h, Component } from 'vue'
+    import { ref,defineComponent, h, Component,onMounted } from 'vue'
     import { NIcon, useMessage } from 'naive-ui'
     import type { MenuOption } from 'naive-ui'
-    import { RouterLink } from 'vue-router'
+    import { RouterLink,useRoute,useRouter } from 'vue-router'
     import {routeModuleList} from "../../router";
     import {generatorMenu,renderIcon} from '@/utils'
-    import {useRouter} from "vue-router";
 
+    const defaultKey = ref('')
     // console.log(routeModuleList,'routeModuleList')
+    onMounted(()=>{
+      const route=useRoute();
+      //获取当前路由的key
+      const routeKey=route.name;
+      defaultKey.value=routeKey;
+    })
     const router=useRouter();
     const menuOptions=generatorMenu(routeModuleList)
     const handleUpdateValue=(key,item)=>{
       // console.log(key)
       // console.log(item)
+      defaultKey.value=key
       router.push({name:key})
     }
+
     import {
         BookOutline as BookIcon,
         PersonOutline as PersonIcon,

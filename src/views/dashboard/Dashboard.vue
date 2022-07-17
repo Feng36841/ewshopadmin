@@ -4,10 +4,11 @@
     </div>
 </template>
 
-<script>
-    export default {
-        name: "Dashboard"
-    }
+<script setup>
+    import {users} from "../../api/users";
+    users().then(res=>{
+        console.log(res,'222')
+    })
 </script>
 
 <style scoped>
